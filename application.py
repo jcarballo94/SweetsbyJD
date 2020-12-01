@@ -1,13 +1,19 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
+#initialize the application
 app = Flask(__name__)
+
+#showing debug messages
 app.config["DEBUG"] = True
 
+#initiliaze the SQL DATABASE connection
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
+
+#user model
 class User( db.Model ):
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(100))
@@ -28,6 +34,7 @@ class User( db.Model ):
         self.username = username
         self.password = password
 
+ #order model
 class Order( db.Model ):
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer)
